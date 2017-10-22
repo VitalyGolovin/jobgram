@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class Employer {
     @SerializedName("logo_urls")
     @Expose
-    private Object logoUrls;
+    private LogoUrls logoUrls;
     @SerializedName("vacancies_url")
     @Expose
     private String vacanciesUrl;
@@ -30,11 +30,11 @@ public class Employer {
     @Expose
     private Boolean trusted;
 
-    public Object getLogoUrls() {
+    public LogoUrls getLogoUrls() {
         return logoUrls;
     }
 
-    public void setLogoUrls(Object logoUrls) {
+    public void setLogoUrls(LogoUrls logoUrls) {
         this.logoUrls = logoUrls;
     }
 

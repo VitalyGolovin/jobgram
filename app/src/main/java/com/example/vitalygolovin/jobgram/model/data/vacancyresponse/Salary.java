@@ -1,5 +1,7 @@
 package com.example.vitalygolovin.jobgram.model.data.vacancyresponse;
 
+import android.content.Intent;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,7 +18,7 @@ public class Salary {
     private Boolean gross;
     @SerializedName("from")
     @Expose
-    private Object from;
+    private Integer from;
     @SerializedName("currency")
     @Expose
     private String currency;
@@ -37,11 +39,11 @@ public class Salary {
         this.gross = gross;
     }
 
-    public Object getFrom() {
+    public Integer getFrom() {
         return from;
     }
 
-    public void setFrom(Object from) {
+    public void setFrom(Integer from) {
         this.from = from;
     }
 

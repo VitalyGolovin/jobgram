@@ -2,5 +2,15 @@
     <string name="app_name">Jobgram</string>
     <string name="search">Искать</string>
     <string name="vacancy_hint">Что будем искать?</string>
+
+    <!--Main-->
     <string name="error">Попробуйте позже</string>
+
+    <!--MainActivity-->
+    <string name="ot">от </string>
+    <string name="rub">руб. </string>
+    <string name="main_title">Cписок вакансий </string>
+
+    <!--DetailActivity-->
+    <string name="detail_title">Детальная информация</string>
 </resources>

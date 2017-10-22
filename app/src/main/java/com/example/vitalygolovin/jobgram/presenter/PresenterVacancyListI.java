@@ -7,4 +7,6 @@ package com.example.vitalygolovin.jobgram.presenter;
 public interface PresenterVacancyListI {
 
     void onListItemClick();
+
+    void onCreateView();
 }
