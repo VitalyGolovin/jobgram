@@ -1,5 +1,6 @@
 package com.example.vitalygolovin.jobgram.model.classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ public class VacancyKeeper {
 
     private static VacancyKeeper sInstance;
 
-    private List<VacancyListItem> mVacancyList;
+    private List<VacancyListItem> mVacancyList = new ArrayList<>();
 
     private VacancyKeeper(){}
 
@@ -27,5 +28,9 @@ public class VacancyKeeper {
 
     public void setVacancyList(List<VacancyListItem> vacancyList) {
         mVacancyList = vacancyList;
+    }
+
+    public VacancyListItem getVacancy(int position){
+        return mVacancyList.get(position);
     }
 }

@@ -20,7 +20,7 @@ public class PresenterVacancyList implements PresenterVacancyListI {
 
     @Override
     public void onListItemClick() {
-
+        mViewList.toDetail();
     }
 
     @Override

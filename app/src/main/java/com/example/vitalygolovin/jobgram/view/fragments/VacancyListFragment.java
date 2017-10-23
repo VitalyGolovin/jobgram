@@ -1,5 +1,6 @@
 package com.example.vitalygolovin.jobgram.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.example.vitalygolovin.jobgram.model.classes.VacancyKeeper;
 import com.example.vitalygolovin.jobgram.model.classes.VacancyListItem;
 import com.example.vitalygolovin.jobgram.presenter.PresenterVacancyList;
 import com.example.vitalygolovin.jobgram.presenter.PresenterVacancyListI;
+import com.example.vitalygolovin.jobgram.view.DetailActivity;
 import com.example.vitalygolovin.jobgram.view.ViewVacancyListI;
 import com.example.vitalygolovin.jobgram.view.adapters.VacancyAdapter;
 
@@ -40,6 +42,7 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
     RecyclerView mRecyclerView;
 
     private VacancyAdapter mAdapter;
+    private int mPosition;
 
     public static VacancyListFragment newInstance() {
 
@@ -74,12 +77,14 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
 
     @Override
     public int getClickPosition() {
-        return 0;
+        return mPosition;
     }
 
     @Override
     public void toDetail() {
-
+        Log.d(TAG, String.valueOf(mPosition));
+        Intent intent = DetailActivity.newIntent(getActivity(),mPosition);
+        startActivity(intent);
     }
 
     @Override
@@ -96,5 +101,8 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
     @Override
     public void onListItemClick(int position) {
         Log.d(TAG, String.valueOf(position));
+        mPosition = position;
+        mPresenterList.onListItemClick();
     }
+
 }
