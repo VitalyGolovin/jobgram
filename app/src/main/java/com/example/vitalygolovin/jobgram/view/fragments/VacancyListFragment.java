@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.example.vitalygolovin.jobgram.R;
 import com.example.vitalygolovin.jobgram.model.classes.VacancyKeeper;
@@ -40,6 +45,8 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
 
     @BindView(R.id.vacancy_list_rv)
     RecyclerView mRecyclerView;
+    @BindView(R.id.list_toolbar)
+    Toolbar mToolbar;
 
     private VacancyAdapter mAdapter;
     private int mPosition;
@@ -52,6 +59,8 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         mVacancyList = mVacancyKeeper.getVacancyList();
         printList(mVacancyList);
@@ -69,10 +78,20 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
         View view = inflater.inflate(R.layout.vacancy_list_fragment, container, false);
         ButterKnife.bind(this,view);
 
+        setToolbar();
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mPresenterList = new PresenterVacancyList(this);
         mPresenterList.onCreateView();
         return view;
+    }
+
+    private void setToolbar() {
+        mToolbar.setNavigationIcon(R.drawable.back_arrow);
+        mToolbar.setTitle(getString(R.string.result_title));
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -105,4 +124,12 @@ public class VacancyListFragment extends Fragment implements ViewVacancyListI{
         mPresenterList.onListItemClick();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            getActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

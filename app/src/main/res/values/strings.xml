@@ -5,11 +5,12 @@
 
     <!--Main-->
     <string name="error">Попробуйте позже</string>
+    <string name="main_title">Поиск</string>
 
-    <!--MainActivity-->
+    <!--ResultActivity-->
     <string name="ot">от </string>
     <string name="rub">руб. </string>
-    <string name="main_title">Cписок вакансий </string>
+    <string name="result_title">Cписок вакансий </string>
 
     <!--DetailActivity-->
     <string name="detail_title">Детальная информация</string>

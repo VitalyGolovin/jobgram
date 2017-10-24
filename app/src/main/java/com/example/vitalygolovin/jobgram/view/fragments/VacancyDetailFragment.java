@@ -3,9 +3,12 @@ package com.example.vitalygolovin.jobgram.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +40,8 @@ public class VacancyDetailFragment extends Fragment implements ViewVacancyDetail
     public static final String TAG = "VacancyDetailFragment";
     public static final String BUNDLE_POSITION = "bundle_position";
 
+    @BindView(R.id.detail_toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.detail_logo)
     ImageView mLogo;
     @BindView(R.id.detail_vacancy_name)
@@ -63,6 +68,9 @@ public class VacancyDetailFragment extends Fragment implements ViewVacancyDetail
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
         mPosition = getArguments().getInt(BUNDLE_POSITION);
         Log.d(TAG, String.valueOf(mPosition));
     }
@@ -73,9 +81,19 @@ public class VacancyDetailFragment extends Fragment implements ViewVacancyDetail
         View view = inflater.inflate(R.layout.detail_fragment,container,false);
         ButterKnife.bind(this,view);
 
+        setToolbar();
+
         mPresenterDetail = new PresenterVacancyDetail(this);
         mPresenterDetail.onCreateView(mPosition);
         return view;
+    }
+
+    private void setToolbar() {
+        mToolbar.setNavigationIcon(R.drawable.back_arrow);
+        mToolbar.setTitle(getString(R.string.detail_title));
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -123,5 +141,14 @@ public class VacancyDetailFragment extends Fragment implements ViewVacancyDetail
         } else {
             return Html.fromHtml(html).toString();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            getActivity().finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

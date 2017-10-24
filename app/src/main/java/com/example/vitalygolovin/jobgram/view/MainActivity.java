@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements ViewMainI {
     EditText mVacancyEt;
     @BindView(R.id.main_button_search)
     Button mSearchButton;
+    @BindView(R.id.main_toolbar)
+    Toolbar mToolbar;
 
     private PresenterMainI mPresenterMain;
 
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements ViewMainI {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setToolbar();
+
         mPresenterMain = new PresenterMain(this);
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements ViewMainI {
                 mPresenterMain.onSearchButtonClick();
             }
         });
+    }
+
+    private void setToolbar() {
+        mToolbar.setTitle(getString(R.string.main_title));
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        setSupportActionBar(mToolbar);
     }
 
 
